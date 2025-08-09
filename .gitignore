@@ -1,0 +1,11 @@
+# dependencies
+node_modules/
+.vscode/
+
+# macOS
+.DS_Store
+*.pem
+
+# local env files
+.env*.local
+.env
