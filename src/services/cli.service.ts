@@ -14,7 +14,7 @@ import {
   displayInfo,
   displaySuccess,
   displayWarning,
-} from "../helpers/cliDispaly.helper";
+} from "../helpers/cliDisplay.helper";
 
 const MINIMUM_CATEGORIES_REQUIRED = 2;
 
@@ -23,7 +23,7 @@ async function promptForInputDirectory(): Promise<string> {
     type: "text",
     name: "directory",
     message: "📁 Where are your notes located?",
-    initial: process.cwd(),
+    initial: "./old-notes",
     validate: (value) => {
       if (!value || value.trim().length === 0) {
         return "Please enter a directory path";
@@ -39,7 +39,7 @@ async function promptForCategories(): Promise<Category[]> {
     type: "text",
     name: "categories",
     message: "🏷️  What categories should I use to organize your notes?",
-    initial: "Work,Personal,Ideas,Books,Advice",
+    initial: "Work,Personal,Ideas,Books,Workout,Nutrition",
     hint: "Separate with commas (e.g., Work, Personal, Ideas)",
     validate: (value) => {
       const categoryCount =
@@ -60,10 +60,25 @@ async function promptForOutputDirectory(): Promise<string> {
     name: "directory",
     message: "📤 Where should I save the converted notes?",
     initial: "./output",
-    validate: (value) => {
+    validate: async (value) => {
       if (!value || value.trim().length === 0) {
         return "Please enter an output directory";
       }
+
+      const resolvedPath = path.resolve(value);
+
+      // Check if directory exists and is not empty
+      if (fs.existsSync(resolvedPath)) {
+        try {
+          const files = fs.readdirSync(resolvedPath);
+          if (files.length > 0) {
+            return "Directory is not empty. Please choose an empty directory or clear it first.";
+          }
+        } catch (error) {
+          return "Cannot read directory contents. Please check permissions.";
+        }
+      }
+
       return true;
     },
   });

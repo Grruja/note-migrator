@@ -15,7 +15,7 @@ import {
   displaySummary,
   displayProcessingStart,
   displayError,
-} from "./helpers/cliDispaly.helper";
+} from "./helpers/cliDisplay.helper";
 
 async function main() {
   try {
