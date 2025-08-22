@@ -27,6 +27,8 @@ npm install
 npm run note-migrator
 ```
 
+**🎁 Bonus:** The project comes with example notes in the `old-notes/` directory, so you can test the tool immediately after cloning!
+
 The tool will guide you through:
 
 1. 📁 **Input Directory** - Where your notes are located
