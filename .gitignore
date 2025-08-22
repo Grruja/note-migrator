@@ -1,5 +1,6 @@
 # dependencies
 node_modules/
+output/
 .vscode/
 
 # macOS
@@ -9,3 +10,7 @@ node_modules/
 # local env files
 .env*.local
 .env
+
+# typescript
+*.tsbuildinfo
+/dist/
