@@ -63,13 +63,12 @@ async function checkRequiredFiles(
   inputDirectory: string,
   directoryPath: string
 ): Promise<boolean> {
-  for (const requiredFile of ["notePad.html", "json.js"]) {
-    const filePath = path.join(directoryPath, requiredFile);
-    const absolutePath = path.resolve(inputDirectory, filePath);
-    const exists = await fs.pathExists(absolutePath);
-    if (!exists) return false;
-  }
-  return true;
+  // Only json.js is required, notePad.html is optional
+  const requiredFile = "json.js";
+  const filePath = path.join(directoryPath, requiredFile);
+  const absolutePath = path.resolve(inputDirectory, filePath);
+  const exists = await fs.pathExists(absolutePath);
+  return exists;
 }
 
 function generateStableHash(input: string): string {
